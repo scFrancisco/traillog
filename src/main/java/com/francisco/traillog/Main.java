@@ -20,7 +20,9 @@ public class Main {
                     "\nDistancia: \n" + treino2.getDistanceInKm() +
                     "\nTempo: \n" +treino2.getTimeInSeconds() +
                     "\nVelocidade Média: \n" +treino2.calculateAVGSpeed());
-
+            treino1.setPowerAVG(251);
+            treino1.setPowerMAX(424);
+            System.out.println(treino1);
 
         }
 }

@@ -150,4 +150,24 @@ public class Workout {
     public Double getSpeedMAX() {
         return speedMAX;
     }
+
+    @Override
+    public String toString() {
+        return "Workout{" +
+                "distanceInKm=" + distanceInKm +
+                ", workoutName='" + workoutName + '\'' +
+                ", timeInSeconds=" + timeInSeconds +
+                ", powerAVG=" + getTextValue(powerAVG) +
+                ", hrAVG=" + getTextValue(hrAVG) +
+                ", powerMAX=" + getTextValue(powerMAX) +
+                ", hrMAX=" + getTextValue(hrMAX) +
+                ", tss=" + getTextValue(tss) +
+                ", speedAVG=" + getTextValue(speedAVG) +
+                ", speedMAX=" + getTextValue(speedMAX) +
+                '}';
+    }
+
+    public String getTextValue(Object value){
+        return value != null ? value.toString()  : "N/A";
+    }
 }
