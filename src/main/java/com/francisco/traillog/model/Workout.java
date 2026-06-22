@@ -28,11 +28,8 @@ public class Workout {
 
     public Workout(String workoutName, double distanceInKm, int timeInSeconds) {
         /*make a switch case to validate args*/
-        if(workoutName == null){
-            throw new IllegalArgumentException("workoutName cannot be null during construction. Workout details: \ndistance: " + distanceInKm + "\ntime: "  + timeInSeconds);
-        } else if(workoutName.isEmpty()){
-            throw new IllegalArgumentException("workoutName cannot be empty during construction. Workout details: \ndistance: " + distanceInKm + "\ntime: "  + timeInSeconds);
-        } else if (distanceInKm<0) {
+        validateWorkoutName(workoutName);
+        if (distanceInKm<0) {
             throw new IllegalArgumentException("distanceInKm cannot be negative during construction: " + distanceInKm);
         } else if (timeInSeconds<=0){
             throw new IllegalArgumentException("timeInSeconds cannot be negative  during construction: " + timeInSeconds);
@@ -41,15 +38,24 @@ public class Workout {
         this.distanceInKm = distanceInKm;
         this.timeInSeconds = timeInSeconds;
     }
+
     public double calculateAVGSpeed(){
         if(this.timeInSeconds <= 0){
             throw new IllegalStateException("timeInSeconds cannot be negative: " + this.timeInSeconds);
         }
-        double speedAvg = 0;
-        speedAvg = this.distanceInKm /(this.timeInSeconds/3600.0) ;
-        return speedAvg;
+        return  this.distanceInKm /(this.timeInSeconds/3600.0) ;
     }
+
+    private void validateWorkoutName(String workoutName){
+        if(workoutName == null){
+            throw new IllegalArgumentException("workoutName cannot be null. Workout details: \ndistance: " + distanceInKm + "\ntime: "  + timeInSeconds);
+        } else if(workoutName.isEmpty()){
+            throw new IllegalArgumentException("workoutName cannot be empty. Workout details: \ndistance: " + distanceInKm + "\ntime: "  + timeInSeconds);
+        }
+    }
+
     public void setWorkoutName(String workoutName) {
+        validateWorkoutName(workoutName);
         this.workoutName = workoutName;
     }
 
@@ -167,7 +173,7 @@ public class Workout {
                 '}';
     }
 
-    public String getTextValue(Object value){
+    private String getTextValue(Object value){
         return value != null ? value.toString()  : "N/A";
     }
 }
