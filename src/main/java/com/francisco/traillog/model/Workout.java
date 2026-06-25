@@ -7,7 +7,7 @@ public class Workout {
     /* a descricao que as vezes tem para certas series, ete pode ser null */
     private String description;
     /* km dai double*/
-    private double distanceInKm;
+    private double  distanceInKm;
     /* segundos*/
     private int timeInSeconds;
     /*training stress score*/
@@ -32,7 +32,7 @@ public class Workout {
         if (distanceInKm<0) {
             throw new IllegalArgumentException("distanceInKm cannot be negative during construction: " + distanceInKm);
         } else if (timeInSeconds<=0){
-            throw new IllegalArgumentException("timeInSeconds cannot be negative  during construction: " + timeInSeconds);
+            throw new IllegalArgumentException("timeInSeconds cannot be negative during construction: " + timeInSeconds);
         }
         this.workoutName = workoutName;
         this.distanceInKm = distanceInKm;
@@ -48,9 +48,9 @@ public class Workout {
 
     private void validateWorkoutName(String workoutName){
         if(workoutName == null){
-            throw new IllegalArgumentException("workoutName cannot be null. Workout details: \ndistance: " + distanceInKm + "\ntime: "  + timeInSeconds);
+            throw new IllegalArgumentException("workoutName cannot be null.");
         } else if(workoutName.isEmpty()){
-            throw new IllegalArgumentException("workoutName cannot be empty. Workout details: \ndistance: " + distanceInKm + "\ntime: "  + timeInSeconds);
+            throw new IllegalArgumentException("workoutName cannot be empty.");
         }
     }
 

@@ -36,7 +36,6 @@ class WorkoutRepositoryTest {
 
     @Test
     void should_getAllWorkouts_when_workoutExists() {
-        
         workoutRepository.addWorkout(new Workout("test1",1,1));
         workoutRepository.addWorkout(new Workout("test2",2,2));
         assertEquals(2, workoutRepository.getAllWorkouts().size());
