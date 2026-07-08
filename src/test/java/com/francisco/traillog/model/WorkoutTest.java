@@ -2,6 +2,9 @@ package com.francisco.traillog.model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class WorkoutTest {
@@ -51,4 +54,49 @@ class WorkoutTest {
         Workout workout = new Workout("test1",40,3600);
         assertEquals(40,workout.calculateAVGSpeed());
     }
+
+    @Test
+    void should_returnAllStrings_when_createWorkoutWithArgsValid(){
+        Workout workout = new Workout("test1",40,3600);
+        workout.setPowerAVG(1);
+        workout.setHrAVG(2);
+        workout.setPowerMAX(3);
+        workout.setHrMAX(4);
+        workout.setTss(5);
+        workout.setSpeedAVG(6.0);
+        workout.setSpeedMAX(7.0);
+        String expected ="Workout{" +
+                "distanceInKm=40.0" +
+                ", workoutName='test1'" +
+                ", timeInSeconds=3600"+
+                ", powerAVG=1" +
+                ", hrAVG=2" +
+                ", powerMAX=3" +
+                ", hrMAX=4" +
+                ", tss=5" +
+                ", speedAVG=6.0" +
+                ", speedMAX=7.0" +
+                "}";
+        assertEquals(expected, workout.toString());
+    }
+
+    @Test
+    void should_returnNAStrings_when_optionalFieldsAreNull(){
+        Workout workout = new Workout("test1",40,3600);
+        String expected ="Workout{" +
+                "distanceInKm=40.0" +
+                ", workoutName='test1'" +
+                ", timeInSeconds=3600"+
+                ", powerAVG=N/A" +
+                ", hrAVG=N/A" +
+                ", powerMAX=N/A" +
+                ", hrMAX=N/A" +
+                ", tss=N/A" +
+                ", speedAVG=N/A" +
+                ", speedMAX=N/A" +
+                "}";
+        assertEquals(expected, workout.toString());
+
+    }
+
 }
