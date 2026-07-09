@@ -3,6 +3,7 @@ package com.francisco.traillog.model;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -99,4 +100,64 @@ class WorkoutTest {
 
     }
 
+    @Test
+    void should_returnTrue_whenWorkoutIsEquals(){
+        Workout workout = new Workout("test1",40,3600);
+        Workout workout2 = new Workout("test1",40,3600);
+
+        assertEquals(workout,workout2);
+        assertEquals(workout2,workout);
+    }
+
+    @Test
+    void should_returnFalse_whenWorkoutIsNotEqualsName(){
+        Workout workout = new Workout("test1",40,3600);
+        Workout workout2 = new Workout("test2",40,3600);
+        
+        assertNotEquals(workout,workout2);
+        assertNotEquals(workout2,workout);
+    }
+    @Test
+    void should_returnFalse_whenWorkoutIsNotEqualsDistance(){
+        Workout workout = new Workout("test1",40,3600);
+        Workout workout2 = new Workout("test1",41,3600);
+
+        assertNotEquals(workout,workout2);
+        assertNotEquals(workout2,workout);
+    }
+
+    @Test
+    void should_returnFalse_whenWorkoutIsNotEqualsTime(){
+        Workout workout = new Workout("test1",40,3600);
+        Workout workout2 = new Workout("test1",40,3601);
+
+        assertNotEquals(workout,workout2);
+        assertNotEquals(workout2,workout);
+    }
+    @Test
+    void should_returnTrue_whenWorkoutIsEqualsHashCode(){
+        Workout workout = new Workout("test1",40,3600);
+        Workout workout2 = new Workout("test1",40,3600);
+        assertEquals(workout.hashCode(),workout2.hashCode());
+    }
+
+    @Test
+    void should_returnFalse_whenWorkoutIsNull(){
+        Workout workout = new Workout("test1",40,3600);
+        assertNotEquals(workout,null);
+    }
+
+    @Test
+    void should_returnTrue_whenAddWorkoutHash(){
+        Workout workout = new Workout("test1",40,3600);
+        Workout workout2 = new Workout("test1",40,3600);
+
+        HashSet<Workout> workouts = new HashSet<>();
+        workouts.add(workout);
+        assertEquals(false,workouts.add(workout2));
+
+        assertEquals(1,workouts.size());
+
+
+    }
 }

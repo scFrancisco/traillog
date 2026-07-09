@@ -1,5 +1,7 @@
 package com.francisco.traillog.model;
 
+import java.util.Objects;
+
 public class Workout {
 
     /* por norma os treinos estao todos com titulo a especificar o que e , acho que deveria depois ate ser not null*/
@@ -155,6 +157,18 @@ public class Workout {
 
     public Double getSpeedMAX() {
         return speedMAX;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Workout workout = (Workout) o;
+        return Double.compare(getDistanceInKm(), workout.getDistanceInKm()) == 0 && getTimeInSeconds() == workout.getTimeInSeconds() && Objects.equals(getWorkoutName(), workout.getWorkoutName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getWorkoutName(), getDistanceInKm(), getTimeInSeconds());
     }
 
     @Override
