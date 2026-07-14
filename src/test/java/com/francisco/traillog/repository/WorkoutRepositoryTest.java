@@ -30,7 +30,6 @@ class WorkoutRepositoryTest {
         
         workoutRepository.addWorkout(new Workout("test1",1,1));
         workoutRepository.addWorkout(new Workout("test2",2,2));
-        workoutRepository.addWorkout(new Workout("test3",3,3));
         assertThrows(IllegalStateException.class, () -> workoutRepository.addWorkout(new Workout("test1",1,1)));
     }
 

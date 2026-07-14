@@ -2,25 +2,23 @@ package com.francisco.traillog.repository;
 
 import com.francisco.traillog.model.Workout;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class WorkoutRepository {
-    private List<Workout> workouts = new ArrayList<>();
+    private Set<Workout> workouts = new LinkedHashSet<>();
+
 
     public void  addWorkout(Workout workout){
         if(workout == null)
             throw new IllegalArgumentException("workout cannot be null");
-        for (Workout w : workouts){
-            if( w.getWorkoutName().equals(workout.getWorkoutName()) && w.getTimeInSeconds() == workout.getTimeInSeconds() && w.getDistanceInKm() == workout.getDistanceInKm() ){
-                throw new IllegalStateException("Workout already exists");
-            }
-        }
-        workouts.add(workout);
+        boolean result= workouts.add(workout);
+        if(!result)
+            throw new IllegalStateException("workout already exists");
     }
 
-    public List<Workout> getAllWorkouts() {
-        return new ArrayList<>(workouts);
+    public Set<Workout> getAllWorkouts() {
+        return new LinkedHashSet<>(workouts);
     }
     public Workout findByName(String name) {
         if (name==null || name.isEmpty())
