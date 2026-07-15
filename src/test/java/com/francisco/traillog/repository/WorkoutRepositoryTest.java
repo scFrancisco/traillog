@@ -1,5 +1,7 @@
 package com.francisco.traillog.repository;
 
+import com.francisco.traillog.exception.DuplicateWorkoutException;
+import com.francisco.traillog.exception.WorkoutNotFoundException;
 import com.francisco.traillog.model.Workout;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +32,7 @@ class WorkoutRepositoryTest {
         
         workoutRepository.addWorkout(new Workout("test1",1,1));
         workoutRepository.addWorkout(new Workout("test2",2,2));
-        assertThrows(IllegalStateException.class, () -> workoutRepository.addWorkout(new Workout("test1",1,1)));
+        assertThrows(DuplicateWorkoutException.class, () -> workoutRepository.addWorkout(new Workout("test1",1,1)));
     }
 
     @Test
@@ -65,7 +67,7 @@ class WorkoutRepositoryTest {
     @Test
     void should_throwException_when_findByNameArgIsInvalid() {
         
-        assertThrows(IllegalStateException.class, () -> workoutRepository.findByName("test"));
+        assertThrows(WorkoutNotFoundException.class, () -> workoutRepository.findByName("test"));
     }
 
 

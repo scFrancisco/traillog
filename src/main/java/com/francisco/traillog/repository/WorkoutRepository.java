@@ -1,5 +1,7 @@
 package com.francisco.traillog.repository;
 
+import com.francisco.traillog.exception.DuplicateWorkoutException;
+import com.francisco.traillog.exception.WorkoutNotFoundException;
 import com.francisco.traillog.model.Workout;
 
 import java.util.LinkedHashSet;
@@ -14,7 +16,7 @@ public class WorkoutRepository {
             throw new IllegalArgumentException("workout cannot be null");
         boolean result= workouts.add(workout);
         if(!result)
-            throw new IllegalStateException("workout already exists");
+            throw new DuplicateWorkoutException("workout already exists " +  workout);
     }
 
     public Set<Workout> getAllWorkouts() {
@@ -28,7 +30,7 @@ public class WorkoutRepository {
                 return w;
             }
         }
-        throw new IllegalStateException("Workout not found");
+        throw WorkoutNotFoundException.forName(name);
     }
 
 }
