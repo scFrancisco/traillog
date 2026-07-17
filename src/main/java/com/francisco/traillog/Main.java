@@ -2,15 +2,20 @@ package com.francisco.traillog;
 
 
 import com.francisco.traillog.model.Workout;
+import com.francisco.traillog.repository.WorkoutRepository;
 
 public class Main {
     public static void main(String[] args)
         {
             Workout treino1;
             Workout treino2;
+            WorkoutRepository workoutRepository = new WorkoutRepository();
+
             treino1 = new Workout("Zona 2",63.2,8000);
             treino2 = new Workout("Zona 1",23.2,7000);
 
+            workoutRepository.addWorkout(treino1);
+            workoutRepository.addWorkout(treino2);
 
             System.out.println("Treino : \n" + treino1.getWorkoutName() +
                     "\nDistancia: \n" + treino1.getDistanceInKm() +
@@ -22,6 +27,8 @@ public class Main {
                     "\nVelocidade Média: \n" +treino2.calculateAVGSpeed());
             treino1.setPowerAVG(251);
             treino1.setPowerMAX(424);
+
+            System.out.println(workoutRepository.findByName("Zona 4"));
             System.out.println(treino1);
 
         }

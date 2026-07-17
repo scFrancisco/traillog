@@ -1,6 +1,6 @@
 package com.francisco.traillog.exception;
 
-public class WorkoutNotFoundException extends RuntimeException {
+public class WorkoutNotFoundException extends TrailLogException {
     public WorkoutNotFoundException(String message) {
         super(message);
     }
