@@ -4,8 +4,11 @@ import com.francisco.traillog.exception.DuplicateWorkoutException;
 import com.francisco.traillog.exception.WorkoutNotFoundException;
 import com.francisco.traillog.model.Workout;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class WorkoutRepository {
     private Set<Workout> workouts = new LinkedHashSet<>();
@@ -32,5 +35,11 @@ public class WorkoutRepository {
         }
         throw WorkoutNotFoundException.forName(name);
     }
+    public List<Workout> filterByMinDistance(double minKm) {
+        return workouts.stream().filter(w -> w.getDistanceInKm()>=minKm).collect(Collectors.toList());
+    }
 
+    public double getTotalDistance() {
+        return workouts.stream().mapToDouble(Workout::getDistanceInKm).sum();
+    }
 }
