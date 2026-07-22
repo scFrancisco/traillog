@@ -4,10 +4,7 @@ import com.francisco.traillog.exception.DuplicateWorkoutException;
 import com.francisco.traillog.exception.WorkoutNotFoundException;
 import com.francisco.traillog.model.Workout;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class WorkoutRepository {
@@ -41,5 +38,16 @@ public class WorkoutRepository {
 
     public double getTotalDistance() {
         return workouts.stream().mapToDouble(Workout::getDistanceInKm).sum();
+    }
+
+    public List<String> getAllWorkoutNames(){
+        return workouts.stream().map(Workout::getWorkoutName).collect(Collectors.toList());
+    }
+
+    public List<Workout> getWorkoutsSortedByDistance(){
+        return workouts.stream().sorted(Comparator.comparingDouble(Workout::getDistanceInKm)).collect(Collectors.toList());
+    }
+    public Map<String, List<Workout>> getWorkoutsGroupedByName(){
+        return workouts.stream().collect(Collectors.groupingBy(Workout::getWorkoutName));
     }
 }

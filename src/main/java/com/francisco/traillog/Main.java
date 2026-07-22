@@ -28,8 +28,12 @@ public class Main {
             treino1.setPowerAVG(251);
             treino1.setPowerMAX(424);
 
-            System.out.println(workoutRepository.findByName("Zona 4"));
-            System.out.println(treino1);
+            //System.out.println(workoutRepository.findByName("Zona 4"));
+            //System.out.println(treino1);
+            System.out.println(Double.NaN == Double.NaN);
+            System.out.println(0.0 == -0.0);
+            System.out.println(Double.compare(Double.NaN, Double.NaN));
+            System.out.println(Double.compare(0.0, -0.0));
 
         }
 }
