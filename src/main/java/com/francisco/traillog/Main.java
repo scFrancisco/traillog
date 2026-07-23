@@ -4,6 +4,8 @@ package com.francisco.traillog;
 import com.francisco.traillog.model.Workout;
 import com.francisco.traillog.repository.WorkoutRepository;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args)
         {
@@ -34,6 +36,7 @@ public class Main {
             System.out.println(0.0 == -0.0);
             System.out.println(Double.compare(Double.NaN, Double.NaN));
             System.out.println(Double.compare(0.0, -0.0));
-
+            List<String> nomes = List.of("a", "b", "c");
+            nomes.stream().filter(s -> s.equals("a"));
         }
 }
