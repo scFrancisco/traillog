@@ -133,4 +133,21 @@ class WorkoutRepositoryTest {
         assertEquals(workoutsExpected, workouts);
 
     }
+
+    @Test
+    void should_returnCounterOfAllWorkouts_groupByName_when_workoutsExist() {
+        workoutRepository.addWorkout(new Workout("test1",1,1));
+        workoutRepository.addWorkout(new Workout("test2",2,2));
+        workoutRepository.addWorkout(new Workout("test3",3,3));
+        workoutRepository.addWorkout(new Workout("test3",4,4));
+
+        Map<String, Long> workouts = workoutRepository.getWorkoutsCountByName();
+        Map<String, Long> workoutsExpected = Map.of(
+                "test1",1L,
+                "test2",1L,
+                "test3",2L
+        );
+
+        assertEquals(workoutsExpected, workouts);
+    }
 }

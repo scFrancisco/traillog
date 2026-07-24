@@ -50,4 +50,12 @@ public class WorkoutRepository {
     public Map<String, List<Workout>> getWorkoutsGroupedByName(){
         return workouts.stream().collect(Collectors.groupingBy(Workout::getWorkoutName));
     }
+
+    public Map<String, Long> getWorkoutsCountByName(){
+        return workouts.stream().collect(Collectors.groupingBy(Workout::getWorkoutName,Collectors.counting()));
+    }
+
+    public Optional<Workout> findByNameOptional(String name){
+        return workouts.stream().filter(w -> w.getWorkoutName().equals(name)).findFirst();
+    }
 }
