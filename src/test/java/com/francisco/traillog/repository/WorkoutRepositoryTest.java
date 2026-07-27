@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -149,5 +150,25 @@ class WorkoutRepositoryTest {
         );
 
         assertEquals(workoutsExpected, workouts);
+    }
+
+    @Test
+    void should_returnWorkout_when_nameExists(){
+        Workout workout = new Workout("test1",1,1);
+        workoutRepository.addWorkout(workout);
+        assertEquals(Optional.of(workout),workoutRepository.findByNameOptional("test1"));
+    }
+
+    @Test
+    void should_returnEmptyOptional_when_nameNotFound(){
+        Workout workout = new Workout("test1",1,1);
+        workoutRepository.addWorkout(workout);
+        assertEquals(Optional.empty(),workoutRepository.findByNameOptional("test2"));
+    }
+
+    @Test
+    void should_returnEmptyOptional_when_nameArgIsNull(){
+        workoutRepository.addWorkout(new Workout("test1",1,1));
+        assertEquals(Optional.empty(),workoutRepository.findByNameOptional(null));
     }
 }
