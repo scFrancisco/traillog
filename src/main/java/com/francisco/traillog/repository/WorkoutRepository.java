@@ -16,7 +16,7 @@ public class WorkoutRepository {
             throw new IllegalArgumentException("workout cannot be null");
         boolean result= workouts.add(workout);
         if(!result)
-            throw new DuplicateWorkoutException("workout already exists " +  workout);
+            throw DuplicateWorkoutException.forWorkout(workout);
     }
 
     public Set<Workout> getAllWorkouts() {

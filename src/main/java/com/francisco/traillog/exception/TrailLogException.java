@@ -4,4 +4,7 @@ public class TrailLogException extends RuntimeException{
     public TrailLogException(String message) {
         super(message);
     }
+    public TrailLogException(String message, Throwable cause) {
+        super(message,cause);
+    }
 }

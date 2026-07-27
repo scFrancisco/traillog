@@ -2,9 +2,9 @@ package com.francisco.traillog.model;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+
 import java.util.HashSet;
-import java.util.List;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -144,7 +144,7 @@ class WorkoutTest {
     @Test
     void should_returnFalse_whenWorkoutIsNull(){
         Workout workout = new Workout("test1",40,3600);
-        assertNotEquals(workout,null);
+        assertNotEquals(null,workout);
     }
 
     @Test
@@ -154,7 +154,7 @@ class WorkoutTest {
 
         HashSet<Workout> workouts = new HashSet<>();
         workouts.add(workout);
-        assertEquals(false,workouts.add(workout2));
+        assertFalse(workouts.add(workout2));
 
         assertEquals(1,workouts.size());
 

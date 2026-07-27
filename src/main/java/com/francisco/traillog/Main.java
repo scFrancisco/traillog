@@ -1,10 +1,10 @@
 package com.francisco.traillog;
 
 
+import com.francisco.traillog.exception.TrailLogException;
 import com.francisco.traillog.model.Workout;
 import com.francisco.traillog.repository.WorkoutRepository;
 
-import java.util.List;
 
 public class Main {
     public static void main(String[] args)
