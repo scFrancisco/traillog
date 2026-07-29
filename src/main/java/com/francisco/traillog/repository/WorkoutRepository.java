@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class WorkoutRepository {
-    private Set<Workout> workouts = new LinkedHashSet<>();
+    private final Set<Workout> workouts = new LinkedHashSet<>();
 
 
     public void  addWorkout(Workout workout){
@@ -53,6 +53,10 @@ public class WorkoutRepository {
 
     public Map<String, Long> getWorkoutsCountByName(){
         return workouts.stream().collect(Collectors.groupingBy(Workout::getWorkoutName,Collectors.counting()));
+    }
+
+    public List<Workout> getWorkoutsSortedByDateTime(){
+        return workouts.stream().sorted(Comparator.comparing(Workout::getDateTime)).collect(Collectors.toList());
     }
 
     public Optional<Workout> findByNameOptional(String name){

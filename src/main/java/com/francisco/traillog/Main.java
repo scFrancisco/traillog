@@ -1,9 +1,11 @@
 package com.francisco.traillog;
 
 
-import com.francisco.traillog.exception.TrailLogException;
+
 import com.francisco.traillog.model.Workout;
 import com.francisco.traillog.repository.WorkoutRepository;
+
+import java.time.LocalDateTime;
 
 
 public class Main {
@@ -13,8 +15,8 @@ public class Main {
             Workout treino2;
             WorkoutRepository workoutRepository = new WorkoutRepository();
 
-            treino1 = new Workout("Zona 2",63.2,8000);
-            treino2 = new Workout("Zona 1",23.2,7000);
+            treino1 = new Workout("Zona 2",63.2,8000, LocalDateTime.now());
+            treino2 = new Workout("Zona 1",23.2,7000, LocalDateTime.now());
 
             workoutRepository.addWorkout(treino1);
             workoutRepository.addWorkout(treino2);
@@ -32,6 +34,7 @@ public class Main {
 
             workoutRepository.findByNameOptional("Treino").ifPresent(w-> System.out.println("Treino: " + w.getWorkoutName()));
             workoutRepository.findByNameOptional("Zona 1").ifPresent(w-> System.out.println("Treino: " + w.getWorkoutName()));
+
 
         }
 }

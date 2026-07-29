@@ -1,5 +1,6 @@
 package com.francisco.traillog.model;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Workout {
@@ -9,9 +10,12 @@ public class Workout {
     /* a descricao que as vezes tem para certas series, ete pode ser null */
     private String description;
     /* km dai double*/
-    private double  distanceInKm;
+    private final double  distanceInKm;
     /* segundos*/
-    private int timeInSeconds;
+    private final int timeInSeconds;
+
+    /*ficou como localdatetime necessidade de ir ao detalhe do minuto (futuramente vai ser preciso trocar devido as integracoes com a garmin)*/
+    private final LocalDateTime dateTime;
     /*training stress score*/
     private Integer tss;
     /*potencia* media e max*/
@@ -28,17 +32,20 @@ public class Workout {
     private Double speedAVG;
     private Double speedMAX;
 
-    public Workout(String workoutName, double distanceInKm, int timeInSeconds) {
+    public Workout(String workoutName, double distanceInKm, int timeInSeconds,LocalDateTime dateTime) {
         /*make a switch case to validate args*/
         validateWorkoutName(workoutName);
         if (distanceInKm<0) {
             throw new IllegalArgumentException("distanceInKm cannot be negative during construction: " + distanceInKm);
         } else if (timeInSeconds<=0){
             throw new IllegalArgumentException("timeInSeconds cannot be negative during construction: " + timeInSeconds);
+        } else if (dateTime == null){
+            throw new IllegalArgumentException("dateTime cannot be null during construction: " + workoutName);
         }
         this.workoutName = workoutName;
         this.distanceInKm = distanceInKm;
         this.timeInSeconds = timeInSeconds;
+        this.dateTime = dateTime;
     }
 
     public double calculateAVGSpeed(){
@@ -159,16 +166,18 @@ public class Workout {
         return speedMAX;
     }
 
+    public LocalDateTime getDateTime() { return dateTime; }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Workout workout = (Workout) o;
-        return Double.compare(getDistanceInKm(), workout.getDistanceInKm()) == 0 && getTimeInSeconds() == workout.getTimeInSeconds() && Objects.equals(getWorkoutName(), workout.getWorkoutName());
+        return Double.compare(getDistanceInKm(), workout.getDistanceInKm()) == 0 && getTimeInSeconds() == workout.getTimeInSeconds() && Objects.equals(getWorkoutName(), workout.getWorkoutName()) &&  Objects.equals(getDateTime(),workout.getDateTime());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getWorkoutName(), getDistanceInKm(), getTimeInSeconds());
+        return Objects.hash(getWorkoutName(), getDistanceInKm(), getTimeInSeconds(), getDateTime());
     }
 
     @Override
@@ -177,6 +186,7 @@ public class Workout {
                 "distanceInKm=" + distanceInKm +
                 ", workoutName='" + workoutName + '\'' +
                 ", timeInSeconds=" + timeInSeconds +
+                ", dateTime=" + dateTime +
                 ", powerAVG=" + getTextValue(powerAVG) +
                 ", hrAVG=" + getTextValue(hrAVG) +
                 ", powerMAX=" + getTextValue(powerMAX) +
